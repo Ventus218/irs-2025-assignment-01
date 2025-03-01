@@ -3,6 +3,14 @@
 left to right direction
 hide empty description
 
+state RandomWalk {
+    [*] --> GoingStraight
+    GoingStraight : go straight
+    GoingStraight --> Turning : after 5 seconds
+
+    Turning : turn right
+    Turning --> GoingStraight : after 1 second
+}
 [*] --> RandomWalk
 RandomWalk --> Obstacle : found obstacle / stop moving
 
