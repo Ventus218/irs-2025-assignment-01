@@ -4,16 +4,16 @@ left to right direction
 hide empty description
 
 [*] --> RandomWalk
-RandomWalk --> Obstacle
+RandomWalk --> Obstacle : found obstacle / stop moving
 
 state Obstacle <<choice>>
 Obstacle --> ObstacleRight : [on right]
 Obstacle --> ObstacleLeft : [on left]
 
 ObstacleLeft : turn right
-ObstacleLeft -u-> RandomWalk : no obstacles left and right
+ObstacleLeft -u-> RandomWalk : no obstacles left and right / stop turning
 
 ObstacleRight : turn left
-ObstacleRight -u-> RandomWalk : no obstacles left and right
+ObstacleRight -u-> RandomWalk : no obstacles left and right / stop turning
 
 @enduml
