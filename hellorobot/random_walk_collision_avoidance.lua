@@ -23,23 +23,23 @@ end
 
 function step()
 	if state == STATE_RANDOM_WALK then
-		if obstacle_left(N_SENSORS) then
+		if obstacle_left() then
 			state = STATE_OBSTACLE_LEFT
-		elseif obstacle_right(N_SENSORS) then
+		elseif obstacle_right() then
 			state = STATE_OBSTACLE_RIGHT
 		else
 			robot.wheels.set_velocity(VELOCITY, VELOCITY)
 		end
 
 	elseif state == STATE_OBSTACLE_LEFT then
-		if obstacle_any_dir(N_SENSORS) then
+		if obstacle_any_dir() then
 			robot.wheels.set_velocity(TURN_VELOCITY, -TURN_VELOCITY)
 		else 
 			state = STATE_RANDOM_WALK
 		end
 		
 	elseif state == STATE_OBSTACLE_RIGHT then
-		if obstacle_any_dir(N_SENSORS) then
+		if obstacle_any_dir() then
 			robot.wheels.set_velocity( -TURN_VELOCITY, TURN_VELOCITY)	
 		else 
 			state = STATE_RANDOM_WALK
@@ -49,9 +49,9 @@ function step()
 	log_state()
 end
 
-function obstacle(n_sensors, side)
+function obstacle(side)
 	found_obstacle = false
-	for i=0, n_sensors do
+	for i=0, N_SENSORS do
 		index = -1
 		if side == SIDE_LEFT then
 			index = 1 + i
@@ -65,14 +65,14 @@ function obstacle(n_sensors, side)
 	return found_obstacle
 end
 
-function obstacle_left(n_sensors)
-	return obstacle(n_sensors, SIDE_LEFT)
+function obstacle_left()
+	return obstacle(SIDE_LEFT)
 end
-function obstacle_right(n_sensors)
-	return obstacle(n_sensors, SIDE_RIGHT)
+function obstacle_right()
+	return obstacle(SIDE_RIGHT)
 end
-function obstacle_any_dir(n_sensors)
-	return obstacle_left(n_sensors) or obstacle_right(n_sensors)
+function obstacle_any_dir()
+	return obstacle_left() or obstacle_right()
 end
 
 function log_state()
