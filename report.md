@@ -2,6 +2,15 @@
 
 ## 1. Phototaxis
 
+### General idea
+The robot detects light on light sensors 1 and 24.
+
+It compares the light level detected by the two sensors and steers in order to make them equalize.
+
+We want the robot to turn faster when going in a completely wrong direction, and slower when going the right direction (also avoiding zig-zag). So the correction is linearly adjusted based on the difference in order to make small corrections if the difference is small and higher corrections if it's high.
+
+This way of computing the correction works well only if we take into account the direction of the light and not its intensity. A way to do this is detecting the minimum and maximum light on all the sensor and mapping the sensed light on sensors 1 and 24 from 0 to 1 based on the minimum and maximum light.
+
 ## 2. Random walk with collision avoidance
 
 ### General idea
