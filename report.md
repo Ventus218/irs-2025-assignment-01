@@ -45,3 +45,11 @@ I've tried to instantiate multiple robot which caused no unexpected behavior.
 Adding sensor noise caused an immediate problem as the robots starts rotating endlessly.
 
 The reason is that no treshold was set with respect to detecting obstacles, and so even a small noise would cause the robot to detect obstacles everywhere at any time.
+
+## 3. Food for thought
+- **What does exactly mean to “Program the robot such that it is able to perform phototaxis”? Is the task correctly, properly and completely defined?**
+- **Obstacle avoidance: to what extent are we sure to avoid any kind of collision? How can we attain a safe wandering? Did you experience situations in which the robot gets stuck? If so, what might be done to avoid them?**
+- **What are the main difficulties in each of the robot programming exercises?**
+- **Which of the two tasks between phototaxis and obstacle avoidance is harder to program? Why?**
+- **Does the controller need memory to let the robot achieve the desired task? If yes,why? If not, would it help?**
+- **How would you assess the performance of the robot?**
