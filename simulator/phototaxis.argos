@@ -27,6 +27,8 @@
       <sensors>
         <differential_steering implementation="default" noise_level="0.0" />
         <footbot_light implementation="rot_z_only" show_rays="false" noise_level="0.0" />
+        <!-- Noised light sensors -->
+        <!-- <footbot_light implementation="rot_z_only" show_rays="false" noise_level="0.1" /> -->
       </sensors>
       <params script="phototaxis.lua" />
     </lua_controller>
@@ -57,6 +59,14 @@
            color="yellow"
            intensity="1"
            medium="leds"/>
+
+    <!-- Add extra light -->
+    <!-- <light id="light2"
+           position="1,1,0.5"
+           orientation="0,0,0"
+           color="yellow"
+           intensity="1"
+           medium="leds"/> -->
     
     
 <!--     Place the robot in a given precise position -->
