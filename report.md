@@ -48,8 +48,29 @@ The reason is that no treshold was set with respect to detecting obstacles, and 
 
 ## 3. Food for thought
 - **What does exactly mean to “Program the robot such that it is able to perform phototaxis”? Is the task correctly, properly and completely defined?**
+
+  Multiple things are not specified, for example if the robot should stop when reaching the spot nearest to the light or what should it do when multiple light sources are present.
+
 - **Obstacle avoidance: to what extent are we sure to avoid any kind of collision? How can we attain a safe wandering? Did you experience situations in which the robot gets stuck? If so, what might be done to avoid them?**
+
+  The robot might get stuck in the sense that there are possible environmental conditions that cause a loop in its behavior.
+  
 - **What are the main difficulties in each of the robot programming exercises?**
+
+  The hardest things were dealing with noised sensors, strange placing of sensors on the robot.
+
 - **Which of the two tasks between phototaxis and obstacle avoidance is harder to program? Why?**
+
+  I'd say the second exercise was harder since it was implemented with some kind of memory.
+
 - **Does the controller need memory to let the robot achieve the desired task? If yes,why? If not, would it help?**
+
+  In both the exercises memory can provide an ehancement:
+  - In phototaxi it could be useful to choose a single target light source
+  - In the second exercize it was useful to remember in which direction to continue turning.
+
 - **How would you assess the performance of the robot?**
+  
+  In the first exercise we could take into account the amount of time needed to get near (threshold to be set) the light or the length of the path followed.
+
+  In the second exercise one of the most important things is to avoid the robot getting stuck, so we could look for repeated behavior.
