@@ -1,39 +1,46 @@
 
 VELOCITY = 15
+MAX_TURN_VELOCITY = 20
 
 function init()
 	reset()
 end
 
 function step()
--- ---------------------------- BEST SOLUTION UP TO NOW
-	sens_l = robot.light[3].value
-	sens_r = robot.light[22].value
+	-- sensing light left and right
+	sens_l = robot.light[1].value
+	sens_r = robot.light[24].value
+
+	-- want just the direction ignoring intensity
+	min_light_detected = 0
+	max_light_detected = 0
+	for i=1,#robot.light do
+		value = robot.light[i].value
+		if max_light_detected < value then
+			max_light_detected = value
+		end
+		if min_light_detected > value then
+			min_light_detected = value
+		end
+	end
+	sens_l = (sens_l - min_light_detected) / (max_light_detected - min_light_detected)
+	sens_r = (sens_r - min_light_detected) / (max_light_detected - min_light_detected)
+
 	log("L: " .. sens_l)
 	log("R: " .. sens_r)
+
+	-- compute correction, higher if direction is much wrong, lower if not
 	avg = (sens_l + sens_r) / 2
-	diff = math.abs(sens_l - sens_r)
-	correction = diff * 50
-	if (sens_l >= sens_r) or ((sens_l == 0) and (sens_r == 0))  then
+	correction = (1 - avg) * MAX_TURN_VELOCITY
+
+	-- apply correction
+	if (sens_l == 0) and (sens_r == 0) then
+		robot.wheels.set_velocity(VELOCITY, VELOCITY + MAX_TURN_VELOCITY)
+	elseif sens_l > sens_r then
 		robot.wheels.set_velocity(VELOCITY, VELOCITY + correction)
 	else 
 		robot.wheels.set_velocity(VELOCITY + correction, VELOCITY)
 	end
-	
--- ----------------------------
-
-	-- sens1 = robot.light[1].value
-	-- sens24 = robot.light[24].value
-
-	-- left_velocity = 0
-	-- right_velocity = 0
-	-- if sens1 > sens24 then
-	-- 	right_velocity = right_velocity + 1
-	-- else 
-	-- 	left_velocity = left_velocity + 1
-	-- end
-	-- robot.wheels.set_velocity(5 + left_velocity, 5 + right_velocity)
-
 end
 
 function reset()
