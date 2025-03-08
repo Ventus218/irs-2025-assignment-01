@@ -5,11 +5,13 @@
 ### General idea
 The robot detects light on light sensors 1 and 24.
 
-It compares the light level detected by the two sensors and steers in order to make them equalize. (Turning always in the same direction if no light is detected in both sensors)
+The robot should care only about the direction in which the light is detected and not its intensity. A way to do this is detecting the minimum and maximum light on all the sensor and mapping the sensed light on sensors 1 and 24 from 0 to 1 based on the minimum and maximum light.
 
-We want the robot to turn faster when going in a completely wrong direction, and slower when going the right direction (also avoiding zig-zag). So the correction is linearly adjusted based on the difference in order to make small corrections if the difference is small and higher corrections if it's high.
+The average of the two sensor is computed since the center front direction is between the two.
 
-This way of computing the correction works well only if we take into account the direction of the light and not its intensity. A way to do this is detecting the minimum and maximum light on all the sensor and mapping the sensed light on sensors 1 and 24 from 0 to 1 based on the minimum and maximum light.
+The robot compares the light level detected by the two sensors and steers in order to make them equalize. (Turning always in the same direction if no light is detected in both sensors)
+
+The robot should turn faster when going in a completely wrong direction, and slower when going the right direction (also avoiding zig-zag). So the correction (amount of steer) is linearly adjusted based on how much the average of the two sensors is distant from 1 (exactly in front) in order to make small corrections if the difference is small and higher corrections if it's high.
 
 ### Extra light?
 Adding another light source introduce unpredictable behavior about the "choice" of which light to follow.
